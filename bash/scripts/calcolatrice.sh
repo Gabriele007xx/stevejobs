@@ -7,32 +7,6 @@ function menu() {
     echo "5) Esci"
 }
 
-# ciclo principale
-while true
-do
-    menu
-    read -p "Inserisci una scelta (1-5): " scelta 
-    if [["$scelta" =~ ^[1-5]$ ]]; then
-        case $scelta in 
-            1) 
-            addizione ;;
-            2) 
-            sottrazione ;;
-            3) 
-            moltiplicazione ;;
-            4) 
-            divisione ;;
-            5) 
-            echo "Uscita dal programma..." 
-        break 
-        ;;
-        esac
-    else
-        echo "Scelta non valida"
-        sleep 2
-    fi
-    done
-
 function addizione() {
 clear
 somma=0
@@ -124,3 +98,33 @@ function divisione() {
      done
     echo "La divisione è $((num1%num2))"
 }
+
+# ciclo principale
+while true
+do
+    menu
+    read -p "Inserisci una scelta (1-5): " scelta 
+    if [[ "$scelta" =~ ^[1-5]$ ]]; then
+        case $scelta in 
+            1) 
+            addizione
+            ;;
+            2) 
+            sottrazione
+            ;;
+            3) 
+            moltiplicazione
+            ;;
+            4) 
+            divisione
+            ;;
+            5) 
+            echo "Uscita dal programma..." 
+        break 
+        ;;
+        esac
+    else
+        echo "Scelta non valida"
+        sleep 2
+    fi
+    done
