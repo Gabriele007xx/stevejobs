@@ -1,0 +1,1 @@
+I file bash hanno estensione .sh.
