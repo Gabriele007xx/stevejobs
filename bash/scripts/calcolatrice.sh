@@ -12,7 +12,8 @@ clear
 somma=0
 echo "Quanti numeri vuoi sommare?"
 read n
-while "$n" =! ^[1-99999]
+do
+until [[ "$n" =~ ^[0-9]+$ ]];
 do
     echo "non è un numero, inserire di nuovo un numero:"
     read n
@@ -21,7 +22,7 @@ for ((i=0; i<n; i++))
 do
     echo "Inserisci il valore $((i+1))"
     read num
-    while "$num" =! ^[-99999-99999]
+    until [[ "$num" =~ ^[0-9]+$ ]];
     do
         echo "non è un numero, inserire di nuovo un numero:"
         read num
@@ -33,36 +34,45 @@ read -p "Premi un tasto per continuare..."
 }
 
 function sottrazione() {
-    clear
+clear
 sottrazione=0
-echo "Quanti numeri vuoi sottrare?"
+echo "Quanti numeri vuoi sottrarre?"
 read n
-while "$n" =! ^[1-99999]
+do
+until [[ "$n" =~ ^[0-9]+$ ]];
 do
     echo "non è un numero, inserire di nuovo un numero:"
     read n
 done
-for ((i=0; i<n; i++))
+read num
+until [[ "$num" =~ ^[0-9]+$ ]];
+do
+    echo "non è un numero, inserire di nuovo un numero:"
+    read nm
+done
+sottrazione=n
+for ((i=1; i<n; i++))
 do
     echo "Inserisci il valore $((i+1))"
     read num
-    while "$num" =! ^[-99999-99999]
+    until [[ "$num" =~ ^[0-9]+$ ]];
     do
         echo "non è un numero, inserire di nuovo un numero:"
         read num
     done
-    sottrazione=$((sottrazione-num))
+    somma=$((somma+num))
 done
-echo "La sottrazione è $somma"
+echo "La sottrazione è $sottrazone"
 read -p "Premi un tasto per continuare..."
 }
 
 function moltiplicazione() {
 clear
-somma=1
-echo "Quanti numeri vuoi sommare?"
+prodotto=1
+echo "Quanti numeri vuoi moltiplicare?"
 read n
-while "$n" =! ^[1-99999]
+do
+until [[ "$n" =~ ^[0-9]+$ ]];
 do
     echo "non è un numero, inserire di nuovo un numero:"
     read n
@@ -71,14 +81,14 @@ for ((i=0; i<n; i++))
 do
     echo "Inserisci il valore $((i+1))"
     read num
-    while "$num" =! ^[-99999-99999]
+    until [[ "$num" =~ ^[0-9]+$ ]];
     do
         echo "non è un numero, inserire di nuovo un numero:"
         read num
     done
-    somma=$((somma*num))
+    prodotto=$((somma+num))
 done
-echo "La somma è $somma"
+echo "Il prodotto è $prodotto"
 read -p "Premi un tasto per continuare..."
 }
 
@@ -86,17 +96,24 @@ function divisione() {
     clear
     echo "Inserisci il primo numero"
     read num1
-	echo "non è un numero, inserire di nuovo il numero:"        
-    while "$numero" =! ^[-99999-99999]
-    do
-	read  num1
-     done
-     while "$num2" =! ^[-99999-99999]
-     do
+    until [[ "$num1" =~ ^[0-9]+$ ]];
+    	do
         echo "non è un numero, inserire di nuovo un numero:"
-	read  num2
-     done
-    echo "La divisione è $((num1%num2))"
+        read num
+    done
+    echo "Inserire il secondo numero:"
+    read num2
+    until [[ "$num2" =~ ^[0-9]+$ ]];
+    do
+        echo "non è un numero, inserire di nuovo un numero:"
+        read num
+    done
+    if [[ num2 -eq 0]]; then
+	echo "La divisione è impossibile"
+    else
+    	echo "La divisione è $((num1/num2))"
+     fi
+     read -p "Premi un tasto per continuare..."
 }
 
 # ciclo principale
