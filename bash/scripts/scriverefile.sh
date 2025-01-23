@@ -12,7 +12,7 @@ content=$(<"$file");
 
 echo "Contenuto del file:"
 echo " "
-echo "$contenuto"
+echo "$content"
 echo " "
 
 read -p "Premere un pulsante per continuare..."
