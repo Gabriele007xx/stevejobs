@@ -12,7 +12,6 @@ clear
 somma=0
 echo "Quanti numeri vuoi sommare?"
 read n
-do
 until [[ "$n" =~ ^[0-9]+$ ]];
 do
     echo "non è un numero, inserire di nuovo un numero:"
@@ -38,7 +37,6 @@ clear
 sottrazione=0
 echo "Quanti numeri vuoi sottrarre?"
 read n
-do
 until [[ "$n" =~ ^[0-9]+$ ]];
 do
     echo "non è un numero, inserire di nuovo un numero:"
@@ -71,7 +69,6 @@ clear
 prodotto=1
 echo "Quanti numeri vuoi moltiplicare?"
 read n
-do
 until [[ "$n" =~ ^[0-9]+$ ]];
 do
     echo "non è un numero, inserire di nuovo un numero:"
@@ -108,8 +105,8 @@ function divisione() {
         echo "non è un numero, inserire di nuovo un numero:"
         read num
     done
-    if [[ num2 -eq 0]]; then
-	echo "La divisione è impossibile"
+    if [[ $num2 -eq 0 ]]; then
+    	echo "La divisione è impossibile"
     else
     	echo "La divisione è $((num1/num2))"
      fi
