@@ -1,3 +1,6 @@
+<?php
+include('config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,13 +15,31 @@
         <?php
           if(isset($_POST['descrizione']))
           {
-              echo "<p>Descrizione: ".$_POST['descrizione'] . "</p>";
+              echo $_POST['descrizione'];
+              $conn->query("INSERT INTO cose_da_fare (descrizione) VALUES ('".$_POST['descrizione']."')");
           }
         ?>
-        <form method="post">
-            <input type="text" name="descrizione"><br>
+        <form method="post" id="form">
+            <input type="text" name="descrizione" id="descrizione"><br>
             <input type="submit" value="Submit">
         </form>
     </div>
+    <script>
+        document.getElementById("form").addEventListener('submit', onSubmit);
+        function onSubmit() {
+            if (ValidateInput()) {
+                document.getElementById("form").submit();
+            }
+        }
+
+        function ValidateInput() {
+            let descrizione = document.getElementById('descrizione').value;
+            if (descrizione == '') {
+                alert('Inserisci una descrizione');
+                return false;
+            }
+            return true;
+        }
+        </script>
 </body>
 </html>
