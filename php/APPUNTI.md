@@ -66,12 +66,28 @@ $conn->query($sql);
 ### Preparare Query Sicure con Prepared Statements
 
 Per prevenire SQL Injection:
+
+```
 $stmt = $conn->prepare("INSERT INTO utenti (nome, email)
 VALUES (?, ?)");
 $stmt->bind_param("ss", $nome, $email);
 $nome = "Luca";
 $email = "luca@example.com";
 $stmt->execute();
+```
+
+### PDO
+chiude automaticamente la connessione quando l'oggetto PDO esce dallo scope (quando lo script termina o quando l'istanza non è più
+necessaria).
+
+Dov'è il problema?
+
+In piccoli progetti PHP, non è obbligatorio chiudere la connessione perché PDO gestisce
+automaticamente la chiusura della connessione al termine dello script.
+Se il progetto cresce e ci sono molte connessioni simultanee al database, è buona pratica
+chiuderle manualmente per ridurre il carico del server MySQL.
+
+`$conn = null; // Chiudi la connessione esplicitamente`
 
 ## Usare i cookie
 
