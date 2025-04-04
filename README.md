@@ -10,4 +10,6 @@ Tutto quello fatto all'accademia Steve Jobs.
 
 -`bash`: Modulo sistemi operativi, script bash.
 
+-`java`: Modulo programmazione 1, Java.
+
 ![image](https://github.com/user-attachments/assets/97499f9f-4430-4a6b-abd2-30eacbe80fe3)
