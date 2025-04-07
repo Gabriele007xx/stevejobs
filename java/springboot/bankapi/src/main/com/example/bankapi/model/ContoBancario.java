@@ -1,32 +1,51 @@
 package com.example.bankapi.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class ContoBancario {
-	private int id;
-	private double saldo;
-	private String intestatario;
-	
-	public ContoBancario(int id, String intestatario)
-	{
-		this.id=id;
-		this.intestatario=intestatario;
-	}
-	
-	public void diventaRicco()
-	{
-		this.saldo=999999.99;
-	}
-	
-	public int getID()
-	{
-		return id;
-	}
-	
-	public String getIntestatario()
-	{
-		return intestatario;
-	}
-	public double getSaldo()
-	{
-		return saldo;
-	}
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+private String intestatario;
+private double saldo;
+private String tipoConto;
+public ContoBancario() 
+{
+
+}
+public ContoBancario(String intestatario, double saldo, String tipoConto) 
+{
+	this.intestatario = intestatario;
+	this.saldo = saldo;
+	this.tipoConto = tipoConto;
+}
+public Long getId() 
+{ 
+	return id; 
+}
+public String getIntestatario() 
+{ 
+	return intestatario; 
+}
+public void setIntestatario(String intestatario) 
+{ 	
+	this.intestatario = intestatario; 
+}
+public double getSaldo() 
+{ 
+	return saldo; 
+}
+public void setSaldo(double saldo) 
+{ 
+	this.saldo = saldo; 
+}
+public String getTipoConto() 
+{ 
+	return tipoConto; 
+}
+public void setTipoConto(String tipoConto) 
+{ 
+	this.tipoConto = tipoConto; 
+}
 }
