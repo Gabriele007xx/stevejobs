@@ -1,48 +1,53 @@
 package com.example.bankapi.controller;
 
-import org.springframework.web.bind.annotation.*;
-
 import com.example.bankapi.model.ContoBancario;
-
-import java.util.ArrayList;
+import com.example.bankapi.repository.ContoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/conti")
-public class ContoController 
+public class ContoController {
+@Autowired
+private ContoRepository contoRepository;
+// GET tutti i conti
+@GetMapping
+public List<ContoBancario> getAll() 
 {
-	private List<ContoBancario> conti = new ArrayList<>();
-	@GetMapping
-	public List<ContoBancario> getTuttiIConti() 
+	return contoRepository.findAll();
+}
+// POST nuovo conto
+@PostMapping
+public ContoBancario create(@RequestBody ContoBancario conto) 
+{
+	return contoRepository.save(conto);
+}
+// DELETE per ID
+@DeleteMapping("/{id}")
+public String delete(@PathVariable Long id) 
+{
+if (contoRepository.existsById(id)) 
+{
+	contoRepository.deleteById(id);
+	return "Conto eliminato.";
+	} 
+	else 
 	{
-		return conti;
+	return "Conto non trovato.";
 	}
-	@PostMapping
-	public String aggiungiConto(@RequestBody ContoBancario conto) 
-	{
-		conti.add(conto);
-		return "Conto aggiunto con successo.";
-	}
-	@GetMapping("/{id}")
-	public ContoBancario getContoPerId(@PathVariable int id) 
-	{
-		for (ContoBancario conto : conti) 
-		{
-			if (conto.getID() == id) 
-			{
-				return conto;
-			}
-		}
-		return null;
-	}
-	@GetMapping("/saldo-maggiore-di/{soglia}")
-	public List<ContoBancario> filtraPerSaldo(@PathVariable double soglia) 
-	{
-		List<ContoBancario> risultati = new ArrayList<>();
-		for (ContoBancario c : conti) 
-		{
-			if (c.getSaldo() > soglia) risultati.add(c);
-		}
-		return risultati;
-	}
+}
+// Ricerca per intestatario
+@GetMapping("/ricerca")
+public List<ContoBancario> ricercaPerNome(@RequestParam String nome) 
+{
+	return contoRepository.findByIntestatarioContainingIgnoreCase(nome);
+}
+// Filtro per tipo conto
+@GetMapping("/tipo")
+public List<ContoBancario> filtraPerTipo(@RequestParam String tipo) 
+{
+	return contoRepository.findByTipoConto(tipo);
+}
 }
